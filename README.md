@@ -50,7 +50,7 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
 ## Running locally
   The application uses [Python](https://www.python.org) and [pip](https://pip.pypa.io/en/latest/installing.html) so you will have to download and install them as part of the steps below.
 
-1. Copy the credentials from your `text-to-speech-service` service in Bluemix to `app.js`, you can see the credentials using:
+1. Copy the credentials from your `text-to-speech-service` service in Bluemix to `server.py`, you can see the credentials using:
 
   ```sh
   $ cf env <application-name>
