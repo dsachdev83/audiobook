@@ -20,7 +20,7 @@
 $(document).ready(function() {
   var audio = $('.audio').get(0),
     textArea = $('#textArea');
-
+  console.log(audio);
 
   // IE and Safari not supported disabled Speak button
   if ($('body').hasClass('ie') || $('body').hasClass('safari')) {
@@ -53,10 +53,28 @@ $(document).ready(function() {
   $('.speak-button').click(function() {
     $('.result').hide();
     audio.pause();
-
+    var url = $('#textArea').val();
+    var voice = $('#voice').val()
+    var data = {url: url, voice: voice}
+    console.log(data);
+    var str = $("form").serialize();
+    // console.log(str);
     $('#textArea').focus();
     if (validText(textArea.val())) {
-      audio.setAttribute('src','/synthesize?' + $('form').serialize());
+      // audio.setAttribute('src','/synthesize?' + $('form').serialize());
+      $.ajax({
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        url: '/synthesize',
+        data: JSON.stringify(data),
+        success: function () {
+          console.log('success');
+        },
+        error: function () {
+          console.log('error');
+        },
+        dataType: "json"
+      });
     }
   });
 

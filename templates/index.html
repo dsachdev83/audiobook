@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Text to Speech</title>
+    <title>Audiobook</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,35 +15,34 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="row top-nav">
+                <!-- <div class="row top-nav">
                     <div class="col-lg-12"><a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/text-to-speech.html" class="left">Learn more about this service</a><a href="https://github.com/watson-developer-cloud/text-to-speech-python" class="right fork">Fork</a><a href="mailto:watsondevelopercloud@wwpdl.vnet.ibm.com" class="right">Contact Us</a><a href="https://developer.ibm.com/watson/" class="right">Watson Community</a>
                     </div>
                 </div>
                 <div style="padding-bottom:0px;" class="row header">
                     <div class="avatar img-container col-lg-1 col-xs-1">
                     	<img src="static/images/app.png">
-                    </div>
-                    <div class="col-lg-6 col-xs-6">
+                    </div> -->
+<!--                     <div class="col-lg-6 col-xs-6">
                         <h2>Text to Speech Python Starter Application</h2>
                         <p>The Text to Speech service uses IBM's speech synthesis capabilities to convert English or Spanish text to an audio signal. The audio is streamed back to the client with minimal delay. The service can be accessed via a REST interface.</p>
                     </div>
                     <div class="col-lg-4 col-xs-4">
                         <h3>Keep Exploring:</h3><a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/text-to-speech/" class="left">Documentation</a><a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/#!/text-to-speech" class="right">API Details</a>
-                    </div>
-                </div>
+                    </div> -->
+                <!-- </div> -->
             </div>
         </div>
         <div class="row">
             <div class="col-lg-7 col-md-7 col-xs-12">
                 <h2>Try the service</h2>
                 <div class="well">
-                    <form method="get" class="form-horizontal">
+                    <form method="post" class="form-horizontal">
                         <fieldset>
                             <div class="row">
                                 <div class="col-lg-12 col-xs-12">
-                                    <label for="textArea" class="control-label">Enter or paste the text to be synthesized into speech:</label>
-                                    <textarea id="textArea" name="text" rows="8" required class="form-control">The Text to Speech service uses IBM's speech synthesis capabilities to convert English or Spanish text to an audio signal. The audio is streamed back to the client with minimal delay. The service can be accessed via a REST interface.</textarea><span class="help-block"><small>The text language must match the selected voice language:
- Mixing language (English text with a Spanish voice) does not produce valid results.</small></span>
+                                    <label for="textArea" class="control-label">Enter your book url: </label>
+                                    <input id="textArea" name="text" rows="8" required class="form-control"></input><span class="help-block"><small></small></span>
                                 </div>
                             </div>
                             <div style="margin-bottom:30px;" class="row">
@@ -57,9 +56,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 col-xs-4 download-container">
+                                <!-- <div class="col-lg-4 col-xs-4 download-container">
                                     <input value="Download" class="btn btn-block download-button">
-                                </div>
+                                </div> -->
                                 <div class="col-lg-4 col-xs-4 text-center"></div>
                                 <div class="col-lg-4 col-xs-4 ie-speak">
                                     <input value="Speak" class="btn btn-block speak-button">
