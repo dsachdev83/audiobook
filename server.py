@@ -72,24 +72,31 @@ class TextToSpeechService:
 def index():
     return render_template('index.html')
 
-#curl -H "Content-type: application/json" -X GET -G http://localhost:3000/synthesize -d text=hello,there -d voice=VoiceEnUsMichael
-# @app.route('/synthesize', methods=['GET'])
-# def synthesize():
-#     print request.args
-#     voice = request.args.get('voice', 'VoiceEnUsMichael')
-#     accept = request.args.get('accept', 'audio/ogg; codecs=opus')
-#     text = request.args.get('text', '')
-#     download = request.args.get('download', '')
-#     headers = {}
-#     if download:
-#         headers['content-disposition'] = 'attachment; filename=transcript.ogg'
-#     try:
-#         req = textToSpeech.synthesize(text, voice, accept)
-#         return Response(stream_with_context(req.iter_content()),
-#             headers=headers, content_type = req.headers['content-type'])
-#     except Exception,e:
-#         print format(e)
-#         sys.exit(500)
+# curl -H "Content-type: application/json" -X GET -G http://localhost:3000/synthesize -d text=hello,there -d voice=VoiceEnUsMichael
+@app.route('/synthesize', methods=['GET'])
+def synthesize():
+    print request.args
+    voice = request.args.get('voice', 'VoiceEnUsMichael')
+    print voice, type(voice)
+    accept = request.args.get('accept', 'audio/ogg; codecs=opus')
+    print accept, type(accept)
+    text = request.args.get('text', '')
+    print text, type(text)
+    download = request.args.get('download', '')
+    print download, type(download)
+    headers = {}
+    if download:
+        headers['content-disposition'] = 'attachment; filename=transcript.ogg'
+    try:
+        req = textToSpeech.synthesize(text, voice, accept)
+        print req, type(req)
+        print "headers:"
+        print headers, type(headers)
+        return Response(stream_with_context(req.iter_content()),
+            headers=headers, content_type = req.headers['content-type'])
+    except Exception,e:
+        print format(e)
+        sys.exit(500)
 
 
 def get_text(book_url):
@@ -100,7 +107,7 @@ def get_text(book_url):
     f = open('test.pdf', 'rb')
     doc = slate.PDF(f)
     for item in doc:
-            print item
+            # print item
             item = str(item)
             if item is not None:
                 body += item
@@ -112,16 +119,21 @@ def get_text(book_url):
 def post_synthesize():
     print "inside POST synthesize"
     print request.json
-    voice = request.json['voice'].encode('utf-8')
+    voice = request.json['voice']
+    print voice, type(voice)
     # voice = request.args.get('voice', 'VoiceEnUsMichael')
     accept = 'audio/ogg; codecs=opus'
+    print accept, type(accept)
     book_url = request.json['url'].encode('utf-8')
+    print book_url
     # download = request.args.get('download', '')
     download = ''
-    print book_url
+    print download
+    # print book_url
     body = get_text(book_url)
-
-    print body
+    body = body.replace('\'', '"')
+    text = unicode(body, "utf-8")
+    print text, type(text)
     print (str(sys.getsizeof(body)/1000000.0)+'mb')
     #body = request.args.get('body', '')
     #download = True
@@ -129,7 +141,13 @@ def post_synthesize():
     if download:
         headers['content-disposition'] = 'attachment; filename=transcript.ogg'
     try:
-        req = textToSpeech.post_synthesize(body, voice, accept)
+        req = textToSpeech.synthesize(text, voice, accept)
+        print req, type(req)
+        print "headers:"
+        print headers, type(headers)
+        print Response(stream_with_context(req.iter_content()),headers=headers, content_type = req.headers['content-type'])
+        print req.headers['content-type']
+        print req.iter_content()
         return Response(stream_with_context(req.iter_content()),
             headers=headers, content_type = req.headers['content-type'])
     except Exception,e:

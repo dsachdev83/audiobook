@@ -39,6 +39,7 @@ $(document).ready(function() {
   });
 
   $('.audio').on('loadeddata', function () {
+    console.log('audio loaded')
     $('.result').show();
     $('.error').hide();
   });
@@ -63,17 +64,19 @@ $(document).ready(function() {
     if (validText(textArea.val())) {
       // audio.setAttribute('src','/synthesize?' + $('form').serialize());
       $.ajax({
+        headers: {Accept: "*/*"},
         type: "POST",
         contentType: "application/json;charset=utf-8",
         url: '/synthesize',
         data: JSON.stringify(data),
-        success: function () {
-          console.log('success');
+        success: function (data) {
+          console.log('success', data);
+          audio.setAttribute('src', data)
+          $('.result').show();
         },
         error: function () {
           console.log('error');
-        },
-        dataType: "json"
+        }
       });
     }
   });

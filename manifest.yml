@@ -3,7 +3,7 @@ declared-services:
     type: text_to_speech
     plan: free
 applications:
-- name: text-to-speech-python
+- name: audiobook
   command: python server.py
   path: .
   memory: 256M
